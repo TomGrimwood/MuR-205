@@ -1,0 +1,23 @@
+<launch>
+  <!-- include run file from the buttom to top. So the first file will be excuted at the first-->
+  <arg name="local_planner"          default="dwa"            doc="Local planner can be either dwa, eband, base, teb or pose" />
+  <arg name="map_file" default="$(find mir_navigation)/maps/test_6.yaml" doc="Path to a map .yaml file (required)." /> <!-- map for mir robot -->
+
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mir_navigation)/rviz/navigation1.rviz"/> <!-- Rviz for mir robot -->
+  
+  <!-- start plotjuggler -->
+  <!--node pkg="plotjuggler" type="PlotJuggler" name="my_plot_Juggler" args="" /-->
+
+  <include file="$(find mir_navigation)/launch/mir_nav/move_base.xml">
+    <arg name="local_planner" value="$(arg local_planner)"/>
+  </include>
+
+  <!-- Lokalization for mir robot -->
+  <!--include file="$(find mir_navigation)/launch/mir_nav/amcl.launch"> 
+  </include-->
+  
+  <node name="static_map_server" pkg="map_server" type="map_server" args="$(arg map_file)" ns="/" output="screen">
+    <param name="frame_id" type="string" value="map"/>
+  </node>
+
+</launch>
