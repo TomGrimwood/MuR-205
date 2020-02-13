@@ -1,0 +1,6 @@
+<launch> 
+  <!-- start plotjuggler -->
+  <node pkg="plotjuggler" type="PlotJuggler" name="my_plot_Juggler" args="" />
+
+
+</launch>

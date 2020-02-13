@@ -1,0 +1,19 @@
+<launch>
+	<rosparam command="load" file="$(find mur_robot)/config/arm_poses.yaml" />
+	<rosparam command="load" file="$(find mur_robot)/config/mir_poses.yaml" />
+   
+    <!-- MiR Driver -->
+    <!--include file="$(find mir_driver)/launch/mir.launch"> 
+    </include-->
+    
+    <!-- UR Driver -->
+    <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch">
+        <arg name="robot_ip" value="192.168.12.90"/>
+    </include>
+    
+    <!-- Lokalization for mir robot -->
+    <!--include file="$(find ur5_moveit_config)/launch/move_group.launch"> 
+    </include-->
+
+</launch>
+ 
